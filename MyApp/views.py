@@ -8,7 +8,12 @@ def welcome(request):
     print('进来了')
     return render(request, 'welcome.html')
 
+# 返回子页面
+def child(request, eid, oid):
+    return render(request, eid)
 
-def home(requests):
-    return render(requests, 'home.html')
+
+
+def home(request):
+    return render(request, 'welcome.html', {"whichHTML": "Home.html", "oid": ""})
 

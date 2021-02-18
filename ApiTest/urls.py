@@ -25,5 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'welcome/$', welcome),  # 获取菜单
     url(r'home/$', home),  # 获取菜单
+    url(r"^child/(?P<eid>.+)/(?P<oid>.*)/$", child),  # 返回子页面
+
 
 ]
