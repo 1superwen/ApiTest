@@ -23,9 +23,15 @@ from MyApp.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     url(r'welcome/$', welcome),  # 获取菜单
     url(r'home/$', home),  # 获取菜单
     url(r"^child/(?P<eid>.+)/(?P<oid>.*)/$", child),  # 返回子页面
-
+    url(r'^login/$', login),    # 进入登录页面
+    url(r'^login_action/$', login_action),   # 登录
+    url(r'^register_action/$', register_action),  # 注册
+    url(r'^accounts/login/$', login),  # 非登录状态自动跳转登录页面
+    url(r'^logout/$', logout),  # 退出
+    url(r'^pei/$', pei),  # 匿名吐槽
 
 ]
