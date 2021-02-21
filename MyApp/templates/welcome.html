@@ -27,7 +27,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="/help/">
                             帮助
                         </a>
                     </li>
@@ -107,6 +107,12 @@
 $('#page1').load('/child/'+'{{ whichHTML }}/{{ oid }}/')
 </script>
 
+<script>
+    if("{{ whichHTML }}" != 'Home.html'){
+        document.getElementById('menu_btn').click();
+    }
 
+
+</script>
 </body>
 </html>

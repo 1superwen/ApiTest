@@ -9,4 +9,4 @@ class DB_tucao(models.Model):
     ctime = models.DateTimeField(auto_now=True)  # 创建时间
 
     def __str__(self):
-        return self.text+str(self.ctime)
+        return self.text + str(self.ctime)
