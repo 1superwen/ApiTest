@@ -14,7 +14,20 @@ def welcome(request):
 
 # 返回子页面
 def child(request, eid, oid):
-    return render(request, eid)
+
+    res = child_json(eid)
+
+    return render(request, eid, res)
+
+# 控制不同的页面返回不同的数据：数据分发器
+def child_json(eid):
+    res = {}
+    if eid == 'Home.html':
+        data = DB_home_href.objects.all()
+
+        res = {"hrefs": data}
+    return res
+
 
 
 # 进入主页
