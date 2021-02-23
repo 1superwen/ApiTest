@@ -34,5 +34,9 @@ urlpatterns = [
     url(r'^logout/$', logout),  # 退出
     url(r'^pei/$', pei),  # 匿名吐槽
     url(r'^help/$', api_help),  # 进入到帮助文档
+    url(r'^project_list/$', project_list),  # 进入项目列表
+    url(r'^delete_project/$', delete_project),  # 删除项目
+    url(r'^add_project/$', add_project),  # 新增项目
+
 
 ]

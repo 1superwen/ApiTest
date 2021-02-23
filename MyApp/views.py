@@ -24,8 +24,10 @@ def child_json(eid):
     res = {}
     if eid == 'Home.html':
         data = DB_home_href.objects.all()
-
         res = {"hrefs": data}
+    if eid == 'project_list.html':
+        data = DB_project.objects.all()
+        res = {"projects": data}
     return res
 
 
@@ -81,3 +83,19 @@ def pei(request):
 @login_required
 def api_help(request):
     return render(request, 'welcome.html', {"whichHTML": "help.html", "oid": ""})
+
+def project_list(request):
+    return render(request, 'welcome.html', {"whichHTML": "project_list.html", "oid": ""})
+
+# 删除项目
+def delete_project(request):
+    id = request.GET['id']
+
+    DB_project.objects.filter(id=id).delete()
+
+    return HttpResponse('')
+# 新增项目
+def add_project(request):
+    project_name = request.GET['project_name']
+    DB_project.objects.create(name=project_name, remark='', user=request.user.username, other_user='')
+    return HttpResponse('')
