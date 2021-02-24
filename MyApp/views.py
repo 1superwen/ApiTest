@@ -12,25 +12,39 @@ from MyApp.models import *
 def welcome(request):
     return render(request, 'welcome.html')
 
+
+
 # 返回子页面
 def child(request, eid, oid):
-
-    res = child_json(eid)
-
+    res = child_json(eid, oid)
     return render(request, eid, res)
 
+
+
 # 控制不同的页面返回不同的数据：数据分发器
-def child_json(eid):
+def child_json(eid, oid=''):
     res = {}
     if eid == 'Home.html':
-        data = DB_home_href.objects.all()
-        res = {"hrefs": data}
+        date = DB_home_href.objects.all()
+        res = {"hrefs": date}
     if eid == 'project_list.html':
-        data = DB_project.objects.all()
-        res = {"projects": data}
+        date = DB_project.objects.all()
+        res = {"projects": date}
+
+    if eid == 'P_apis.html':
+        project = DB_project.objects.filter(id=oid)[0]
+        res = {"project": project}
+
+    if eid == 'P_cases.html':
+        project = DB_project.objects.filter(id=oid)[0]
+        res = {"project": project}
+
+    if eid == 'P_project_set.html':
+        project = DB_project.objects.filter(id=oid)[0]
+        res = {"project": project}
+
+
     return res
-
-
 
 # 进入主页
 @login_required
@@ -98,4 +112,28 @@ def delete_project(request):
 def add_project(request):
     project_name = request.GET['project_name']
     DB_project.objects.create(name=project_name, remark='', user=request.user.username, other_user='')
+    return HttpResponse('')
+
+# 进入接口库
+def open_apis(request, id):
+    project_id = id
+    return render(request, 'welcome.html', {"whichHTML": "P_apis.html", "oid": project_id})
+
+# 进入用例设置库
+def open_cases(request, id):
+    project_id = id
+    return render(request, 'welcome.html', {"whichHTML": "P_cases.html", "oid": project_id})
+
+# 进入项目设置
+def open_project_set(request, id):
+    project_id = id
+    return render(request, 'welcome.html', {"whichHTML": "P_project_set.html", "oid": project_id})
+
+# 保存项目设置
+def save_project_set(request, id):
+    project_id = id
+    name = request.GET['name']
+    remark = request.GET['remark']
+    other_user = request.GET['other_user']
+    DB_project.objects.filter(id=project_id).update(name=name, remark=remark, other_user=other_user)
     return HttpResponse('')
